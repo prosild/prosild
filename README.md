@@ -1,90 +1,116 @@
-<!--
-**prosild/prosild** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
+<div align="center">
 
-Here are some ideas to get you started:
+<h1>Gil Su Park</h1>
 
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
--->
-# Gil Su Park · prosild
+<p><strong>Backend Development · Data Science · Anomaly Detection</strong></p>
 
-**Backend Development → Data Science → Log Anomaly Detection**
+<p>From understanding system behavior to learning from its data.</p>
+
+<p>
+  <a href="#research-focus">Research</a> &nbsp;·&nbsp;
+  <a href="#experience">Experience</a> &nbsp;·&nbsp;
+  <a href="#selected-projects">Projects</a> &nbsp;·&nbsp;
+  <a href="#tech-stack">Tech Stack</a>
+</p>
+
+</div>
+
+---
 
 ## About
 
-I studied Management Information Systems and spent about three years and four months maintaining Java/Spring web systems.  
-Tracing production issues through application code, SQL, data, and logs led me to questions about how system behavior appears in operational data.  
-I later pursued master's studies in Data Science, focusing my research on graph-based log anomaly detection.  
-My interests span the full path from collecting system data and detecting anomalies to making the results useful in a service.
+My background is in **Management Information Systems**, followed by **3 years and 4 months maintaining Java/Spring web systems**.
+
+Tracing production issues through code, SQL, and application logs led me to study how system behavior appears in operational data. I later pursued **master's studies in Data Science**, focusing on **graph-based log anomaly detection**.
+
+I am interested in connecting data collection, anomaly detection, and the services that use the results.
 
 ## What I Work On
 
-- **Log anomaly detection** — Studying which log characteristics help distinguish normal and abnormal system behavior.
-- **Graph and temporal learning** — Representing relationships between logs and system entities, together with changes over time.
-- **Network and security anomaly detection** — Applying rules and learned models to patterns in network traffic.
-- **AIOps** — Exploring how logs and other operational data can support investigation of system issues.
-- **ML engineering** — Connecting data processing, model evaluation, inference APIs, and applications.
+| Area | Focus |
+| :--- | :--- |
+| **Log Anomaly Detection** | Finding signals that distinguish normal and abnormal system behavior. |
+| **Graph & Temporal Learning** | Representing relationships between logs, entities, and events over time. |
+| **Security Anomaly Detection** | Combining rules and learned models to analyze network traffic. |
+| **AIOps** | Using operational data to support investigation of system issues. |
+| **ML Engineering** | Connecting data processing, model evaluation, inference, and applications. |
 
 ## Research Focus
 
-System logs contain more than messages. The intervals between events, bursts of activity, log levels, and relationships with system entities can also provide signals of abnormal behavior.
+### What can log timing tell us about system behavior?
 
-My master's research examined temporal information that an existing Log-Entity Graph model did not fully capture. I incorporated time intervals, burst patterns, and log levels into graph representations, and experimented with time-aware connections and attention weights.
+Log messages are only part of the picture. **When events occur, how often they repeat, and which entities they relate to** can also help explain anomalies.
 
-Across **BGL, Thunderbird, and HDFS**, the most effective design varied by dataset, but **information about the time between logs repeatedly contributed to better anomaly detection**.
+My master's research examined information that an existing **Log-Entity Graph** model did not fully capture:
 
-The central question was which signals remained useful across different datasets, why they helped, and what the original representation missed.
+- **Time intervals** between log events.
+- **Burst patterns** and changes in event frequency.
+- **Log levels** such as INFO, WARN, and ERROR.
+- **Relationships** between logs and system entities.
+
+I incorporated these signals into graph representations and tested time-aware connections and attention weights on **BGL, Thunderbird, and HDFS**.
+
+> **Key finding**  
+> The most effective design differed by dataset, but time intervals between logs repeatedly helped improve anomaly detection.
+
+The goal was to understand **which signals helped, why they helped, and whether their value held across datasets**.
+
+---
 
 ## Experience
 
 ### Software Development
 
-**Java / Spring web system maintenance · About 3 years and 4 months**
+**Java / Spring web systems** · About 3 years and 4 months
 
-- Implemented user requests and investigated errors across the UI, request handling, Java code, SQL, stored data, and application logs.
-- Used code, queries, and logs together to narrow down causes and checked related functionality after changes.
-- Worked with Spring, MyBatis, CUBRID, jQuery, and JBoss.
+- Maintained web systems and implemented user requests.
+- Investigated errors across the UI, request handling, Java code, SQL, data, and application logs.
+- Checked related functionality and the impact of changes after fixes.
 
 ### Data Science & Research
 
-**Master's studies in Data Science · Log anomaly detection**
+**Master's studies in Data Science** · Log anomaly detection
 
 - Studied statistics, machine learning, deep learning, NLP, and computer vision.
-- Built and evaluated graph-based log anomaly detection experiments with Python and PyTorch.
-- Examined how timing, occurrence patterns, and entity relationships affected detection across log datasets.
+- Built graph-based anomaly detection experiments with **Python and PyTorch**.
+- Evaluated how timing, occurrence patterns, and entity relationships affected detection across datasets.
+
+## Selected Projects
+
+### [NetFlow Port Scan Detection](https://github.com/prosild/netflow_portscan_detection)
+
+Port scan detection using **rules and FlowTransformer**.
+
+- Trained and evaluated models on CIDDS-002.
+- Connected NAS packet collection with PC-based inference.
+- Stored detection results for use in a web dashboard.
+
+`Python` `PyTorch` `FastAPI` `Network Security`
+
+### [NexusPortal](https://github.com/prosild/NexusPortal)
+
+A Spring MVC portal migrated to **Java 17 and Spring Boot**.
+
+- Updated authentication and integrated PostgreSQL.
+- Added a dashboard for the NetFlow project's detection results.
+- Connected backend development with security data analysis.
+
+`Java` `Spring Boot` `MyBatis` `PostgreSQL`
 
 ## Tech Stack
 
 | Area | Technologies |
-| --- | --- |
-| Languages | Python, Java, SQL, JavaScript |
-| AI / Data | PyTorch, scikit-learn, pandas, NumPy |
-| Backend / Web | Spring / Spring Boot, MyBatis, jQuery, HTML / CSS |
-| Database / Infrastructure | CUBRID, PostgreSQL, JBoss, Git, Linux |
+| :--- | :--- |
+| **Languages** | Python · Java · SQL · JavaScript |
+| **AI / Data** | PyTorch · scikit-learn · pandas · NumPy |
+| **Backend / Web** | Spring / Spring Boot · MyBatis · jQuery · HTML / CSS |
+| **Database / Infrastructure** | CUBRID · PostgreSQL · JBoss · Git · Linux |
 
-## Selected Projects
-
-### [netflow_portscan_detection](https://github.com/prosild/netflow_portscan_detection)
-
-Port scan detection combining a rule-based detector with FlowTransformer, using CIDDS-002 for training and evaluation and a NAS-to-PC pipeline for packet collection and inference.
-
-`Python` `PyTorch` `FastAPI` `Network Anomaly Detection`
-
-### [NexusPortal](https://github.com/prosild/NexusPortal)
-
-A Spring MVC portal migrated to Java 17 and Spring Boot, with authentication improvements, PostgreSQL integration, and a dashboard for the NetFlow project's detection results.
-
-`Java` `Spring Boot` `MyBatis` `PostgreSQL`
+---
 
 ## Currently Exploring
 
-- Dynamic and temporal graphs for changing system behavior.
-- Security anomaly detection and AIOps workflows that connect detection with investigation.
-- MLOps practices for reproducible experiments and consistent training and inference pipelines.
-- LLM-assisted log and security analysis grounded in system data.
+- **Dynamic & Temporal Graphs** — Modeling changes in system behavior.
+- **Security & AIOps** — Connecting anomaly detection with investigation.
+- **MLOps** — Reproducible experiments and consistent training and inference.
+- **LLM-assisted Analysis** — Log and security analysis grounded in system data.
