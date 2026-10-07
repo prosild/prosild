@@ -24,7 +24,7 @@ I started in **Java / Spring-based web systems**, working with application logic
 
 That experience led me to data science and eventually to **anomaly detection**: instead of only finding where a failure occurred, I became interested in which patterns in operational data can explain abnormal behavior and whether those patterns remain useful when the environment changes.
 
-I completed an **M.S. in Data Science at Kookmin University** and now focus on problems around **log anomaly detection, graph learning, time-series behavior, security analytics, AIOps, and ML systems**.
+I completed a **master's degree in Data Science at Kookmin University** and now focus on problems around **log anomaly detection, graph learning, time-series behavior, security analytics, AIOps, and ML systems**.
 
 ---
 
