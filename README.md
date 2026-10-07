@@ -6,13 +6,13 @@
 
 I work with **operational data such as system logs and network flows**, focusing on how abnormal behavior can be detected, evaluated, and connected to real systems.
 
-My background in Java/Spring web systems led into an M.S. in Data Science, where I studied **log anomaly detection under interleaving** and the role of temporal and structural signals in graph-based models.
+My background in Java/Spring web systems led me to graduate study in Data Science, where I researched **log anomaly detection under interleaving** and the role of temporal and structural signals in graph-based models.
 
 <br>
 
 <img src="https://img.shields.io/badge/Research-Log%20Anomaly%20Detection-245B6B?style=flat-square" alt="Log Anomaly Detection">
 <img src="https://img.shields.io/badge/ML-Graph%20Learning%20%7C%20Time%20Series-3F6273?style=flat-square" alt="Graph Learning and Time Series">
-<img src="https://img.shields.io/badge/Systems-AIOps%20%7C%20ML%20Systems-536A78?style=flat-square" alt="AIOps and ML Systems">
+<img src="https://img.shields.io/badge/Engineering-ML%20Systems-536A78?style=flat-square" alt="ML Systems">
 
 </div>
 
@@ -24,7 +24,7 @@ I started in **Java / Spring-based web systems**, working with application logic
 
 That experience led me to data science and eventually to **anomaly detection**: instead of only finding where a failure occurred, I became interested in which patterns in operational data can explain abnormal behavior and whether those patterns remain useful when the environment changes.
 
-I completed a **master's degree in Data Science at Kookmin University** and now focus on problems around **log anomaly detection, graph learning, time-series behavior, security analytics, and ML systems**.
+I earned a **master's degree through the Department of Data Science at Kookmin University** and now focus on problems around **log anomaly detection, graph learning, time-series behavior, security analytics, and ML systems**.
 
 ---
 
@@ -50,18 +50,18 @@ flowchart LR
     C --> D3["Level"]
     C --> D4["Top-k"]
 
-    D1 --> E["Compare on<br/>BGL · Thunderbird · HDFS"]
+    D1 --> E["BGL · Thunderbird · HDFS"]
     D2 --> E
     D3 --> E
     D4 --> E
 
-    classDef main fill:#F6F8FA,stroke:#57606A,color:#24292F,stroke-width:1.3px;
-    classDef focus fill:#EAF2F8,stroke:#4F6B7A,color:#233746,stroke-width:1.3px;
-    classDef option fill:#F3F6F8,stroke:#8C959F,color:#34404A,stroke-width:1px;
+    classDef base fill:#f6f8fa,stroke:#8c959f,color:#24292f;
+    classDef focus fill:#eef4f7,stroke:#587384,color:#243746;
+    classDef signal fill:#f8fafb,stroke:#a3adb5,color:#34404a;
 
-    class A,B,E main;
+    class A,B,E base;
     class C focus;
-    class D1,D2,D3,D4 option;
+    class D1,D2,D3,D4 signal;
 ```
 
 I compared four adjacency strategies while keeping the rest of the model and data pipeline fixed.
@@ -101,27 +101,37 @@ A network anomaly-detection pipeline that combines explicit scan rules with a **
 
 The Transformer component is a simplified implementation inspired by FlowTransformer-style sequence modeling rather than a direct reproduction of the original architecture.
 
+The system separates **always-on collection and storage on the NAS** from **model training and inference on the PC**, where more compute is available.
+
 ```mermaid
 flowchart LR
-    A["Packets"] --> B["5-tuple<br/>Flow"]
-    B --> C["30s Window<br/>max 32 flows"]
+    subgraph NAS["NAS · Collection & Storage"]
+        A["Packets"] --> B["5-tuple<br/>Flow"]
+        G[("PostgreSQL")]
+        H["Dashboard"]
+        G --> H
+    end
 
-    C --> D["Rule<br/>Detector"]
-    C --> E["Lightweight<br/>Transformer"]
+    subgraph PC["PC · Training & Inference"]
+        C["30s Window<br/>max 32 flows"]
+        D["Rule<br/>Detector"]
+        E["Lightweight<br/>Transformer"]
+        F["Decision"]
 
-    D --> F["Decision"]
-    E --> F
+        C --> D
+        C --> E
+        D --> F
+        E --> F
+    end
 
-    F --> G[("PostgreSQL")]
-    G --> H["Dashboard"]
+    B --> C
+    F --> G
 
-    classDef input fill:#F6F8FA,stroke:#57606A,color:#24292F,stroke-width:1.2px;
-    classDef detect fill:#EAF2F8,stroke:#4F6B7A,color:#233746,stroke-width:1.3px;
-    classDef output fill:#EEF3F1,stroke:#60766D,color:#2F453D,stroke-width:1.2px;
+    classDef nas fill:#f6f8fa,stroke:#8c959f,color:#24292f;
+    classDef ml fill:#eef4f7,stroke:#587384,color:#243746;
 
-    class A,B,C input;
-    class D,E,F detect;
-    class G,H output;
+    class A,B,G,H nas;
+    class C,D,E,F ml;
 ```
 
 ### What I implemented
@@ -242,5 +252,4 @@ Monitoring / Investigation
 
 My main application interests are **system reliability, anomaly detection, and security-oriented operational data**.
 
-AIOps is relevant to me as an application area for these problems.  
-The engineering practices often associated with MLOps—reproducible pipelines, serving, evaluation, deployment, and monitoring—are capabilities I want to strengthen as part of building production ML systems.
+I see **AIOps as a natural application area for anomaly detection**, while my engineering focus is on building the practical capabilities needed to use ML in real systems: reproducible pipelines, serving, evaluation, deployment, and monitoring.
