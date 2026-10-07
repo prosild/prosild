@@ -41,41 +41,27 @@ The main question was:
 > **What information should determine how strongly two log events are connected?**
 
 ```mermaid
-flowchart TB
-    P["Interleaving Problem<br/>logs from concurrent tasks are mixed"]:::problem
+flowchart LR
+    A["Interleaved<br/>Logs"] --> B["Log-Entity<br/>Graph"]
+    B --> C{"Adjacency<br/>Design"}
 
-    Q{"How should<br/>log-to-log relationships<br/>be represented?"}:::question
+    C --> D1["Time"]
+    C --> D2["Burst"]
+    C --> D3["Level"]
+    C --> D4["Top-k"]
 
-    G["Log-Entity Graph<br/>baseline structure"]:::base
+    D1 --> E["Compare on<br/>BGL · Thunderbird · HDFS"]
+    D2 --> E
+    D3 --> E
+    D4 --> E
 
-    T["Temporal<br/>proximity"]:::signal
-    B["Burst<br/>behavior"]:::signal
-    L["Log<br/>severity"]:::signal
-    K["Top-k<br/>sparsification"]:::signal
+    classDef main fill:#F6F8FA,stroke:#57606A,color:#24292F,stroke-width:1.3px;
+    classDef focus fill:#EAF2F8,stroke:#4F6B7A,color:#233746,stroke-width:1.3px;
+    classDef option fill:#F3F6F8,stroke:#8C959F,color:#34404A,stroke-width:1px;
 
-    X["Same model · Same data pipeline<br/>Adjacency strategy changes only"]:::experiment
-
-    R["Compare anomaly-detection performance<br/>across BGL · Thunderbird · HDFS"]:::result
-
-    P --> Q --> G
-    G --> T
-    G --> B
-    G --> L
-    G --> K
-
-    T --> X
-    B --> X
-    L --> X
-    K --> X
-
-    X --> R
-
-    classDef problem fill:#f6f8fa,stroke:#57606a,color:#24292f,stroke-width:1.5px;
-    classDef question fill:#ddf4ff,stroke:#0969da,color:#0550ae,stroke-width:2px;
-    classDef base fill:#fff8c5,stroke:#bf8700,color:#633c01,stroke-width:1.5px;
-    classDef signal fill:#dafbe1,stroke:#1a7f37,color:#116329,stroke-width:1.5px;
-    classDef experiment fill:#f6f8fa,stroke:#8c959f,color:#24292f,stroke-width:1.5px;
-    classDef result fill:#fbefff,stroke:#8250df,color:#6639ba,stroke-width:1.5px;
+    class A,B,E main;
+    class C focus;
+    class D1,D2,D3,D4 option;
 ```
 
 I compared four adjacency strategies while keeping the rest of the model and data pipeline fixed.
@@ -117,43 +103,25 @@ The Transformer component is a simplified implementation inspired by FlowTransfo
 
 ```mermaid
 flowchart LR
+    A["Packets"] --> B["5-tuple<br/>Flow"]
+    B --> C["30s Window<br/>max 32 flows"]
 
-    subgraph EDGE["Synology NAS · Collection"]
-        A["Network<br/>Packets"]:::source
-        B["5-tuple<br/>Flow Aggregation"]:::process
-        C["Queue +<br/>Batch Writer"]:::process
-        A --> B --> C
-    end
+    C --> D["Rule<br/>Detector"]
+    C --> E["Lightweight<br/>Transformer"]
 
-    subgraph ML["Inference PC · Detection"]
-        D["30 sec / max 32 flows<br/>Source-based Window"]:::window
-        E1["Rule<br/>Detector"]:::rule
-        E2["Lightweight<br/>Transformer"]:::model
-        F{"Final<br/>Decision"}:::decision
+    D --> F["Decision"]
+    E --> F
 
-        D --> E1
-        D --> E2
-        E1 --> F
-        E2 --> F
-    end
+    F --> G[("PostgreSQL")]
+    G --> H["Dashboard"]
 
-    subgraph APP["Storage · Review"]
-        G[("PostgreSQL")]:::db
-        H["Detection<br/>Dashboard"]:::ui
-        G --> H
-    end
+    classDef input fill:#F6F8FA,stroke:#57606A,color:#24292F,stroke-width:1.2px;
+    classDef detect fill:#EAF2F8,stroke:#4F6B7A,color:#233746,stroke-width:1.3px;
+    classDef output fill:#EEF3F1,stroke:#60766D,color:#2F453D,stroke-width:1.2px;
 
-    C -->|"Flow API"| D
-    F -->|"score · evidence · result"| G
-
-    classDef source fill:#f6f8fa,stroke:#57606a,color:#24292f,stroke-width:1.5px;
-    classDef process fill:#ddf4ff,stroke:#0969da,color:#0550ae,stroke-width:1.5px;
-    classDef window fill:#fff8c5,stroke:#bf8700,color:#633c01,stroke-width:1.5px;
-    classDef rule fill:#dafbe1,stroke:#1a7f37,color:#116329,stroke-width:1.5px;
-    classDef model fill:#fbefff,stroke:#8250df,color:#6639ba,stroke-width:1.5px;
-    classDef decision fill:#ffebe9,stroke:#cf222e,color:#a40e26,stroke-width:1.5px;
-    classDef db fill:#ddf4ff,stroke:#0969da,color:#0550ae,stroke-width:1.5px;
-    classDef ui fill:#f6f8fa,stroke:#57606a,color:#24292f,stroke-width:1.5px;
+    class A,B,C input;
+    class D,E,F detect;
+    class G,H output;
 ```
 
 ### What I implemented
