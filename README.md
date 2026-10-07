@@ -24,7 +24,7 @@ I started in **Java / Spring-based web systems**, working with application logic
 
 That experience led me to data science and eventually to **anomaly detection**: instead of only finding where a failure occurred, I became interested in which patterns in operational data can explain abnormal behavior and whether those patterns remain useful when the environment changes.
 
-I completed a **master's degree in Data Science at Kookmin University** and now focus on problems around **log anomaly detection, graph learning, time-series behavior, security analytics, AIOps, and ML systems**.
+I completed a **master's degree in Data Science at Kookmin University** and now focus on problems around **log anomaly detection, graph learning, time-series behavior, security analytics, and ML systems**.
 
 ---
 
@@ -195,13 +195,13 @@ The rules handle patterns with clear signatures, while the learned model complem
 </td>
 <td width="50%" valign="top">
 
-### Systems
+### ML Engineering
 
-- AIOps
-- ML systems
-- MLOps
+- Operational ML pipelines
 - Model serving and evaluation
-- Monitoring pipelines
+- API / database integration
+- Monitoring and failure analysis
+- AIOps applications
 - LLM-assisted log / security analysis
 
 </td>
@@ -212,40 +212,35 @@ The rules handle patterns with clear signatures, while the learned model complem
 
 ## 🚀 What I Want to Work On
 
-I want to work on **AI systems that detect abnormal behavior in complex operational environments**.
+My near-term goal is to work as an **AI / ML engineer building anomaly-detection systems for operational data**.
 
-In particular, I am interested in three connected areas:
+I am especially interested in environments where logs, network traffic, or system events need to be analyzed continuously and where a model has to work as part of a larger software system.
 
-### 1. Understanding operational data
+### 1. Detect meaningful abnormal behavior
 
-Logs, metrics, and network traffic contain temporal and structural patterns that are easily lost when they are reduced to simple feature vectors or fixed sequences.
+I want to model temporal, structural, and behavioral patterns in operational data and identify which signals remain useful when the environment changes.
 
-I want to study representations that preserve the information needed to distinguish **normal change from meaningful anomalies**.
+### 2. Build reliable ML pipelines
 
-### 2. Building models that survive changing environments
-
-Real systems change over time: workloads shift, software is updated, new events appear, and normal behavior itself evolves.
-
-I am interested in anomaly-detection models that remain useful under **distribution shift and changing system behavior**, rather than only performing well on a fixed offline benchmark.
-
-### 3. Turning models into usable systems
-
-Detection is only useful when the result can reach the people and systems that need it.
-
-I want to work across the path from:
+Beyond offline model performance, I want to work with the engineering around the model:
 
 ```text
 Operational Data
       ↓
-Data Pipeline
+Preprocessing / Feature Construction
       ↓
 ML Model
       ↓
-Inference / Evaluation
+Inference API
       ↓
-API & Storage
+Database / Application
       ↓
 Monitoring / Investigation
 ```
 
-This is why I am interested in both **AIOps** and **MLOps**: AIOps defines the operational problems I want to solve, while ML engineering and MLOps provide the practices needed to build, deploy, and maintain those solutions.
+### 3. Apply ML to real operational problems
+
+My main application interests are **system reliability, anomaly detection, and security-oriented operational data**.
+
+AIOps is relevant to me as an application area for these problems.  
+The engineering practices often associated with MLOps—reproducible pipelines, serving, evaluation, deployment, and monitoring—are capabilities I want to strengthen as part of building production ML systems.
