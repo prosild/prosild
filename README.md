@@ -41,21 +41,41 @@ The main question was:
 > **What information should determine how strongly two log events are connected?**
 
 ```mermaid
-flowchart LR
-    A["Concurrent system activities"] --> B["Interleaved log stream"]
-    B --> C["Log-Entity Graph"]
+flowchart TB
+    P["Interleaving Problem<br/>logs from concurrent tasks are mixed"]:::problem
 
-    C --> D1["Temporal proximity"]
-    C --> D2["Burst behavior"]
-    C --> D3["Log severity"]
-    C --> D4["Top-k sparsification"]
+    Q{"How should<br/>log-to-log relationships<br/>be represented?"}:::question
 
-    D1 --> E["Controlled comparison"]
-    D2 --> E
-    D3 --> E
-    D4 --> E
+    G["Log-Entity Graph<br/>baseline structure"]:::base
 
-    E --> F["Which signal stays useful<br/>across datasets?"]
+    T["Temporal<br/>proximity"]:::signal
+    B["Burst<br/>behavior"]:::signal
+    L["Log<br/>severity"]:::signal
+    K["Top-k<br/>sparsification"]:::signal
+
+    X["Same model · Same data pipeline<br/>Adjacency strategy changes only"]:::experiment
+
+    R["Compare anomaly-detection performance<br/>across BGL · Thunderbird · HDFS"]:::result
+
+    P --> Q --> G
+    G --> T
+    G --> B
+    G --> L
+    G --> K
+
+    T --> X
+    B --> X
+    L --> X
+    K --> X
+
+    X --> R
+
+    classDef problem fill:#f6f8fa,stroke:#57606a,color:#24292f,stroke-width:1.5px;
+    classDef question fill:#ddf4ff,stroke:#0969da,color:#0550ae,stroke-width:2px;
+    classDef base fill:#fff8c5,stroke:#bf8700,color:#633c01,stroke-width:1.5px;
+    classDef signal fill:#dafbe1,stroke:#1a7f37,color:#116329,stroke-width:1.5px;
+    classDef experiment fill:#f6f8fa,stroke:#8c959f,color:#24292f,stroke-width:1.5px;
+    classDef result fill:#fbefff,stroke:#8250df,color:#6639ba,stroke-width:1.5px;
 ```
 
 I compared four adjacency strategies while keeping the rest of the model and data pipeline fixed.
@@ -69,7 +89,7 @@ I compared four adjacency strategies while keeping the rest of the model and dat
 
 ### Result
 
-The **temporal-weighted adjacency** was the only strategy that improved F1 over the baseline across all three evaluated datasets.
+Across the three evaluated datasets, **temporal-weighted adjacency showed consistent F1 improvements over the baseline**.
 
 | Dataset | Baseline F1 | Temporal Weight F1 |
 | --- | ---: | ---: |
@@ -77,9 +97,7 @@ The **temporal-weighted adjacency** was the only strategy that improved F1 over 
 | Thunderbird | 0.9580 | **0.9602** |
 | HDFS | 0.8174 | **0.8282** |
 
-Other signals were more dataset-dependent: burst weighting worked especially well on Thunderbird, while Top-k sparsification performed best on HDFS.
-
-The result suggested that **temporal proximity is a comparatively robust signal for interleaved log anomaly detection**, while the usefulness of other structural signals depends more strongly on the characteristics of each log environment.
+These results suggest that **temporal proximity can provide a stable and useful signal for interleaved log anomaly detection**.
 
 **Master's Thesis**  
 *인터리빙 환경에서 로그-엔티티 그래프 인접 구조 설계의 비교 분석*  
@@ -99,17 +117,43 @@ The Transformer component is a simplified implementation inspired by FlowTransfo
 
 ```mermaid
 flowchart LR
-    A["Network packets"] --> B["5-tuple Flow"]
-    B --> C["Source-based Window<br/>30 sec / max 32 flows"]
 
-    C --> D1["Rule Detector"]
-    C --> D2["Lightweight Transformer"]
+    subgraph EDGE["Synology NAS · Collection"]
+        A["Network<br/>Packets"]:::source
+        B["5-tuple<br/>Flow Aggregation"]:::process
+        C["Queue +<br/>Batch Writer"]:::process
+        A --> B --> C
+    end
 
-    D1 --> E["Decision"]
-    D2 --> E
+    subgraph ML["Inference PC · Detection"]
+        D["30 sec / max 32 flows<br/>Source-based Window"]:::window
+        E1["Rule<br/>Detector"]:::rule
+        E2["Lightweight<br/>Transformer"]:::model
+        F{"Final<br/>Decision"}:::decision
 
-    E --> F["PostgreSQL"]
-    F --> G["Dashboard"]
+        D --> E1
+        D --> E2
+        E1 --> F
+        E2 --> F
+    end
+
+    subgraph APP["Storage · Review"]
+        G[("PostgreSQL")]:::db
+        H["Detection<br/>Dashboard"]:::ui
+        G --> H
+    end
+
+    C -->|"Flow API"| D
+    F -->|"score · evidence · result"| G
+
+    classDef source fill:#f6f8fa,stroke:#57606a,color:#24292f,stroke-width:1.5px;
+    classDef process fill:#ddf4ff,stroke:#0969da,color:#0550ae,stroke-width:1.5px;
+    classDef window fill:#fff8c5,stroke:#bf8700,color:#633c01,stroke-width:1.5px;
+    classDef rule fill:#dafbe1,stroke:#1a7f37,color:#116329,stroke-width:1.5px;
+    classDef model fill:#fbefff,stroke:#8250df,color:#6639ba,stroke-width:1.5px;
+    classDef decision fill:#ffebe9,stroke:#cf222e,color:#a40e26,stroke-width:1.5px;
+    classDef db fill:#ddf4ff,stroke:#0969da,color:#0550ae,stroke-width:1.5px;
+    classDef ui fill:#f6f8fa,stroke:#57606a,color:#24292f,stroke-width:1.5px;
 ```
 
 ### What I implemented
