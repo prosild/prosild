@@ -1,116 +1,249 @@
 <div align="center">
 
-<h1>Gil Su Park</h1>
+# Gilsu Park
 
-<p><strong>Backend Development · Data Science · Anomaly Detection</strong></p>
+### ML / AI Engineering · Anomaly Detection · Graph & Temporal Learning · ML Systems
 
-<p>From understanding system behavior to learning from its data.</p>
+I work with **operational data**—system logs and network flows—and build models and systems that turn those signals into actionable anomaly detections.
 
-<p>
-  <a href="#research-focus">Research</a> &nbsp;·&nbsp;
-  <a href="#experience">Experience</a> &nbsp;·&nbsp;
-  <a href="#selected-projects">Projects</a> &nbsp;·&nbsp;
-  <a href="#tech-stack">Tech Stack</a>
-</p>
+My background in Java/Spring web systems led into an M.S. in Data Science, where I studied how **temporal and structural information in logs** can improve anomaly detection under interleaving.
+
+<br>
+
+[![Thesis](https://img.shields.io/badge/M.S._Thesis-RISS-1f6feb?style=flat-square)](https://www.riss.kr/link?id=T17372490)
+[![Port Scan](https://img.shields.io/badge/Project-NetFlow_Port_Scan_Detection-245B6B?style=flat-square)](https://github.com/prosild/netflow_portscan_detection)
+[![NexusPortal](https://img.shields.io/badge/Project-NexusPortal-536A78?style=flat-square)](https://github.com/prosild/NexusPortal)
 
 </div>
 
 ---
 
-## About
+## 🔎 Profile
 
-My background is in **Management Information Systems**, followed by **3 years and 4 months maintaining Java/Spring web systems**.
-
-Tracing production issues through code, SQL, and application logs led me to study how system behavior appears in operational data. I later pursued **master's studies in Data Science**, focusing on **graph-based log anomaly detection**.
-
-I am interested in connecting data collection, anomaly detection, and the services that use the results.
-
-## What I Work On
-
-| Area | Focus |
-| :--- | :--- |
-| **Log Anomaly Detection** | Finding signals that distinguish normal and abnormal system behavior. |
-| **Graph & Temporal Learning** | Representing relationships between logs, entities, and events over time. |
-| **Security Anomaly Detection** | Combining rules and learned models to analyze network traffic. |
-| **AIOps** | Using operational data to support investigation of system issues. |
-| **ML Engineering** | Connecting data processing, model evaluation, inference, and applications. |
-
-## Research Focus
-
-### What can log timing tell us about system behavior?
-
-Log messages are only part of the picture. **When events occur, how often they repeat, and which entities they relate to** can also help explain anomalies.
-
-My master's research examined information that an existing **Log-Entity Graph** model did not fully capture:
-
-- **Time intervals** between log events.
-- **Burst patterns** and changes in event frequency.
-- **Log levels** such as INFO, WARN, and ERROR.
-- **Relationships** between logs and system entities.
-
-I incorporated these signals into graph representations and tested time-aware connections and attention weights on **BGL, Thunderbird, and HDFS**.
-
-> **Key finding**  
-> The most effective design differed by dataset, but time intervals between logs repeatedly helped improve anomaly detection.
-
-The goal was to understand **which signals helped, why they helped, and whether their value held across datasets**.
+- **Software engineering:** maintained operational Java/Spring web systems and traced issues across application logic, SQL, data, and application logs.
+- **Data science:** completed an **M.S. in Data Science at Kookmin University** with a focus on log anomaly detection.
+- **Research:** studied interleaved logs using **Log-Entity Graphs**, with particular attention to temporal proximity, burst behavior, log severity, and graph sparsification.
+- **Current direction:** anomaly detection for logs and network data, temporal/dynamic graphs, AIOps, security analytics, and ML systems that connect models to real operational pipelines.
 
 ---
 
-## Experience
+## 🎓 M.S. Thesis
 
-### Software Development
+### [Comparative Analysis of Adjacency Construction Strategies for Log-Entity Graph-Based Anomaly Detection under Interleaving](https://www.riss.kr/link?id=T17372490)
 
-**Java / Spring web systems** · About 3 years and 4 months
+**인터리빙 환경에서 로그-엔티티 그래프 인접 구조 설계의 비교 분석**  
+M.S. Thesis · Department of Data Science · Kookmin University  
+[`RISS`](https://www.riss.kr/link?id=T17372490)
 
-- Maintained web systems and implemented user requests.
-- Investigated errors across the UI, request handling, Java code, SQL, data, and application logs.
-- Checked related functionality and the impact of changes after fixes.
+Interleaving occurs when logs from multiple concurrent tasks are mixed along the same timeline.  
+This makes simple sequence or transition-based modeling vulnerable to unrelated events being treated as if they belonged to the same execution flow.
 
-### Data Science & Research
+The thesis keeps the core **Log-Entity Graph** framework and asks a narrower question:
 
-**Master's studies in Data Science** · Log anomaly detection
+> **How should log-to-log adjacency be designed so that the graph reflects operational context, not only shared entities?**
 
-- Studied statistics, machine learning, deep learning, NLP, and computer vision.
-- Built graph-based anomaly detection experiments with **Python and PyTorch**.
-- Evaluated how timing, occurrence patterns, and entity relationships affected detection across datasets.
+```mermaid
+flowchart LR
+    A[Interleaved Logs] --> B[Log-Entity Graph]
+    B --> C1[Temporal Weight]
+    B --> C2[Burst Score]
+    B --> C3[Log-Level Weight]
+    B --> C4[Top-k Sparsification]
 
-## Selected Projects
+    C1 --> D[Compare under the same model / data pipeline]
+    C2 --> D
+    C3 --> D
+    C4 --> D
 
-### [NetFlow Port Scan Detection](https://github.com/prosild/netflow_portscan_detection)
+    D --> E[Which signal remains useful across datasets?]
+```
 
-Port scan detection using **rules and FlowTransformer**.
+### Adjacency strategies
 
-- Trained and evaluated models on CIDDS-002.
-- Connected NAS packet collection with PC-based inference.
-- Stored detection results for use in a web dashboard.
+| Strategy | Idea |
+| --- | --- |
+| **Temporal weight** | Strengthen relationships between logs that occur close in time and weaken distant relationships |
+| **Burst score** | Emphasize locally dense log activity that may indicate state changes or failures |
+| **Log-level weight** | Reflect the different severity of INFO, WARN, ERROR, FATAL, etc. |
+| **Top-k sparsification** | Remove weaker edges from dense subgraphs and preserve stronger relationships |
 
-`Python` `PyTorch` `FastAPI` `Network Security`
+### Key result
 
-### [NexusPortal](https://github.com/prosild/NexusPortal)
+The **temporal-weighted adjacency** was the only design that improved F1 over the baseline on all three evaluated datasets.
 
-A Spring MVC portal migrated to **Java 17 and Spring Boot**.
+| Dataset | Baseline F1 | Temporal-weighted F1 |
+| --- | ---: | ---: |
+| BGL | 0.9268 | **0.9307** |
+| Thunderbird | 0.9580 | **0.9602** |
+| HDFS | 0.8174 | **0.8282** |
 
-- Updated authentication and integrated PostgreSQL.
-- Added a dashboard for the NetFlow project's detection results.
-- Connected backend development with security data analysis.
+Other signals were more dataset-dependent: burst weighting produced the highest result on Thunderbird, while Top-k sparsification performed best on HDFS.
 
-`Java` `Spring Boot` `MyBatis` `PostgreSQL`
-
-## Tech Stack
-
-| Area | Technologies |
-| :--- | :--- |
-| **Languages** | Python · Java · SQL · JavaScript |
-| **AI / Data** | PyTorch · scikit-learn · pandas · NumPy |
-| **Backend / Web** | Spring / Spring Boot · MyBatis · jQuery · HTML / CSS |
-| **Database / Infrastructure** | CUBRID · PostgreSQL · JBoss · Git · Linux |
+**Takeaway:** temporal proximity was the most consistent signal across the evaluated interleaved-log environments, while the usefulness of other adjacency signals depended more strongly on dataset characteristics.
 
 ---
 
-## Currently Exploring
+## 🛠️ Selected Engineering Work
 
-- **Dynamic & Temporal Graphs** — Modeling changes in system behavior.
-- **Security & AIOps** — Connecting anomaly detection with investigation.
-- **MLOps** — Reproducible experiments and consistent training and inference.
-- **LLM-assisted Analysis** — Log and security analysis grounded in system data.
+### 1. [NetFlow Port Scan Detection](https://github.com/prosild/netflow_portscan_detection)
+
+A security anomaly-detection project that connects **packet collection → flow aggregation → window generation → rule / deep-learning inference → PostgreSQL → dashboard**.
+
+<p align="center">
+  <img src="./assets/portscan_architecture.png" width="100%" alt="NetFlow Port Scan Detection system architecture">
+</p>
+
+#### Detection pipeline
+
+- Captures network packets on a **Synology NAS**
+- Aggregates packets into **5-tuple flows**
+- Uses a memory queue and batch writer to separate collection from persistence
+- Sends flows to a **FastAPI** inference service
+- Builds source-based windows of up to **32 flows / 30 seconds**
+- Evaluates each window with both:
+  - interpretable port-scan rules
+  - a lightweight **FlowTransformer**
+- Stores scores, rule evidence, and final decisions in **PostgreSQL**
+- Surfaces detections through a web dashboard
+
+```text
+Packet
+  ↓
+5-tuple Flow
+  ↓
+30s / max 32 Flow Window
+  ↓
+Rule Detector + FlowTransformer
+  ↓
+Alert / Review / Normal
+  ↓
+PostgreSQL
+  ↓
+Dashboard
+```
+
+### Evaluation
+
+On the CIDDS-002 Week2 evaluation used in the project:
+
+| Method | Precision | Recall | F1 |
+| --- | ---: | ---: | ---: |
+| Rule Detector | 79.16% | 50.08% | 61.35% |
+| FlowTransformer | 87.86% | 89.47% | 88.66% |
+| Rule OR Deep Learning | 78.02% | 90.67% | 83.87% |
+| **Deep Learning + explicit scan rules** | **87.93%** | **90.24%** | **89.07%** |
+
+The project uses rules for patterns with clear signatures and the learned model to complement them on patterns that are harder to express with fixed thresholds.
+
+<p align="center">
+  <img src="./assets/portscan_dashboard.png" width="100%" alt="Port Scan Detection dashboard">
+</p>
+
+**Links:**  
+[`Repository`](https://github.com/prosild/netflow_portscan_detection) ·
+[`Dashboard`](https://psdev93.synology.me/portfolio/portscan)
+
+---
+
+### 2. [NexusPortal](https://github.com/prosild/NexusPortal)
+
+A modernization of a legacy Spring MVC portal into a **Java 17 / Spring Boot 3.5** application, extended to consume and visualize the port-scan detection results.
+
+**Engineering work**
+
+- migrated XML-based Spring MVC configuration to **Spring Boot**
+- migrated database logic to **PostgreSQL**
+- added **Spring Security**, Argon2id, CSRF protection, login-attempt limiting, and upload-path validation
+- connected detection results through PostgreSQL and application APIs
+- added administrator and read-only portfolio views for detection windows
+- packaged deployment with **Docker Compose**
+- maintained automated tests with **JUnit 5 / MockMvc**
+
+This project is where my earlier web-system background and the anomaly-detection pipeline meet: the model output becomes data that an operational application can store, query, inspect, and present.
+
+[`Repository`](https://github.com/prosild/NexusPortal)
+
+---
+
+## 🧰 Tech Stack
+
+<p>
+  <img src="https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=white" alt="Python">
+  <img src="https://img.shields.io/badge/PyTorch-EE4C2C?style=flat-square&logo=pytorch&logoColor=white" alt="PyTorch">
+  <img src="https://img.shields.io/badge/Java-ED8B00?style=flat-square&logo=openjdk&logoColor=white" alt="Java">
+  <img src="https://img.shields.io/badge/Spring_Boot-6DB33F?style=flat-square&logo=springboot&logoColor=white" alt="Spring Boot">
+  <img src="https://img.shields.io/badge/FastAPI-009688?style=flat-square&logo=fastapi&logoColor=white" alt="FastAPI">
+  <img src="https://img.shields.io/badge/PostgreSQL-4169E1?style=flat-square&logo=postgresql&logoColor=white" alt="PostgreSQL">
+  <img src="https://img.shields.io/badge/Docker-2496ED?style=flat-square&logo=docker&logoColor=white" alt="Docker">
+  <img src="https://img.shields.io/badge/Linux-FCC624?style=flat-square&logo=linux&logoColor=111111" alt="Linux">
+  <img src="https://img.shields.io/badge/Git-F05032?style=flat-square&logo=git&logoColor=white" alt="Git">
+</p>
+
+| Area | Tools / Technologies |
+| --- | --- |
+| **ML / Data** | PyTorch, scikit-learn, pandas, NumPy |
+| **Backend** | Java, Spring Boot, Spring Security, MyBatis, FastAPI |
+| **Database** | PostgreSQL, SQL |
+| **Web** | HTML, CSS, JavaScript, JSP, jQuery, Bootstrap |
+| **Ops / Workflow** | Docker, Linux, Git, Conda |
+
+---
+
+## 🎯 Current Focus
+
+<table>
+<tr>
+<td width="33%" valign="top">
+
+### Anomaly Detection
+- Log anomaly detection
+- Security / network anomaly detection
+- Distribution shift
+- Robust detection
+
+</td>
+<td width="33%" valign="top">
+
+### Graph & Temporal ML
+- Log-Entity Graphs
+- Dynamic / temporal graphs
+- Temporal behavior
+- Structural anomaly signals
+
+</td>
+<td width="33%" valign="top">
+
+### ML Systems
+- AIOps
+- ML engineering
+- MLOps
+- Model serving / monitoring
+- LLM / RAG for log & security analysis
+
+</td>
+</tr>
+</table>
+
+---
+
+## 🧭 Engineering Perspective
+
+I am most interested in systems where the model is part of a larger operational path:
+
+```text
+Operational Data
+      ↓
+Collection / Parsing
+      ↓
+Representation
+      ↓
+Detection / Inference
+      ↓
+Evaluation
+      ↓
+API / Storage
+      ↓
+Monitoring / Application
+```
+
+My goal is to keep working on the boundary between **anomaly-detection research and the systems required to use those models in practice**.
