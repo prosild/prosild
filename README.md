@@ -17,23 +17,21 @@ I build ML systems that detect abnormal behavior in operational data — system 
 ## At a Glance
 
 - **3+ years in operations** — maintained a public-sector Java/Spring (eGovFrame) system; traced incidents across screens, server logic, SQL, data, and WAS logs
-- **M.S. in Data Science, Kookmin University** — graph-based log anomaly detection using how logs occur in operation (timing, burst, severity)
+- **Master's degree, Kookmin University Graduate School (Data Science major)** — graph-based log anomaly detection using how logs occur in operation (timing, burst, severity)
 - **End-to-end detection system** — NetFlow port-scan detector from packet collection on a NAS to PyTorch/FastAPI inference and a review dashboard (**F1 89.07%** on CIDDS-002 Week2)
 
 ---
 
 ## Now
 
-**SKT K-New Deal Academy · ALEPH** (security operations track, until Dec 2026)
-
-Building a security ML pipeline on top of the course, step by step:
-
-- [ ] PCAP → Zeek JSON logs, reproducible with Docker
-- [ ] Data validation and label alignment (pandas)
-- [ ] PySpark preprocessing and time-window aggregation → Parquet
-- [ ] Unsupervised baseline with experiment tracking (scikit-learn, MLflow)
-- [ ] Inference API and storage (FastAPI, PostgreSQL, Docker Compose) with CI
-- [ ] Dynamic graph anomaly detection as the main model
+- **Course:** SKT K-New Deal Academy · ALEPH — security operations fundamentals, until Dec 2026
+- **Side project:** going beyond the course material, I'm building my own security ML pipeline — from raw network traffic to a served detection model:
+  - [ ] PCAP → Zeek JSON logs, reproducible with Docker
+  - [ ] Data validation and label alignment (pandas)
+  - [ ] PySpark preprocessing and time-window aggregation → Parquet
+  - [ ] Unsupervised baseline with experiment tracking (scikit-learn, MLflow)
+  - [ ] Inference API and storage (FastAPI, PostgreSQL, Docker Compose) with CI
+  - [ ] Dynamic graph anomaly detection as the main model
 
 ---
 
@@ -95,7 +93,7 @@ flowchart LR
 - The other designs helped on some datasets and hurt on others, so the right adjacency depends on the data's characteristics.
 - Next: repeated runs with mean ± std, and combining signals.
 
-*인터리빙 환경에서 로그-엔티티 그래프 인접 구조 설계의 비교 분석* · Kookmin University · 2026
+*인터리빙 환경에서 로그-엔티티 그래프 인접 구조 설계의 비교 분석* · Master's thesis · Kookmin University Graduate School, Data Science · 2026
 
 ---
 
@@ -106,14 +104,11 @@ Collection and storage run always-on on a NAS; training and inference run on a G
 
 ```mermaid
 flowchart LR
-    subgraph NAS["NAS · Collection & Storage"]
+    subgraph N1["NAS · Collection"]
         A["Packets"] --> B["5-tuple<br/>Flow"]
-        G[("PostgreSQL")]
-        H["Dashboard"]
-        G --> H
     end
 
-    subgraph PC["PC · Inference"]
+    subgraph PC["GPU PC · Inference"]
         C["30s window<br/>≤ 32 flows"]
         D["Rule<br/>Detector"]
         E["Lightweight<br/>Transformer"]
@@ -124,6 +119,10 @@ flowchart LR
         E --> F
     end
 
+    subgraph N2["NAS · Storage & Review"]
+        G[("PostgreSQL<br/>flows · scores · evidence")] --> H["Dashboard"]
+    end
+
     B --> C
     F --> G
 
@@ -131,6 +130,9 @@ flowchart LR
     classDef ml fill:#eef4f7,stroke:#587384,color:#243746;
     class A,B,G,H nas;
     class C,D,E,F ml;
+    style N1 fill:#fbfcfd,stroke:#a3adb5,color:#34404a;
+    style PC fill:#fbfcfd,stroke:#a3adb5,color:#34404a;
+    style N2 fill:#fbfcfd,stroke:#a3adb5,color:#34404a;
 ```
 
 <!-- Add one dashboard screenshot or GIF here, e.g. ![Dashboard](docs/dashboard.png) -->
