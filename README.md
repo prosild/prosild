@@ -44,16 +44,17 @@ I build ML systems that detect abnormal behavior in operational data — system 
 **Approach:** I redesigned the log adjacency matrix to include that occurrence context, and compared each design under a controlled setup — same data, splits, model, and training, with only the adjacency changed.
 
 ```mermaid
+%%{init: {"flowchart": {"nodeSpacing": 14, "rankSpacing": 36, "padding": 6}, "themeVariables": {"fontSize": "13px"}}}%%
 flowchart LR
     A["Lograph adjacency<br/>shared-entity count"]
 
     subgraph C["Occurrence context"]
-        T["When<br/>temporal weight"]
-        B["How densely<br/>burst score"]
-        L["How severe<br/>log-level weight"]
+        T["When · temporal weight"]
+        B["How densely · burst score"]
+        L["How severe · log-level weight"]
     end
 
-    K["Which edges<br/>Top-k sparsification"]
+    K["Which edges · Top-k sparsification"]
 
     A --> T
     A --> B
@@ -65,7 +66,7 @@ flowchart LR
     L --> E
     K --> E
 
-    E["Compared one by one<br/>same model · same data<br/>BGL · Thunderbird · HDFS"]
+    E["Compared one by one<br/>BGL · Thunderbird · HDFS"]
 
     classDef base fill:#f6f8fa,stroke:#8c959f,color:#24292f;
     classDef ctx fill:#eef4f7,stroke:#587384,color:#243746;
@@ -103,36 +104,31 @@ Explicit scan rules plus a lightweight Transformer that classifies 30-second flo
 Collection and storage run always-on on a NAS; training and inference run on a GPU PC.
 
 ```mermaid
-flowchart LR
-    subgraph N1["NAS · Collection"]
-        A["Packets"] --> B["5-tuple<br/>Flow"]
+flowchart BT
+    subgraph NAS["NAS · Collection & Storage"]
+        direction LR
+        A["Packets"] --> B["5-tuple Flow"] --> G[("PostgreSQL")] --> H["Dashboard"]
     end
 
     subgraph PC["GPU PC · Inference"]
+        direction LR
         C["30s window<br/>≤ 32 flows"]
-        D["Rule<br/>Detector"]
+        D["Rule Detector"]
         E["Lightweight<br/>Transformer"]
         F["Decision<br/>Alert / Review / Normal"]
-        C --> D
-        C --> E
-        D --> F
-        E --> F
+        C --> D --> F
+        C --> E --> F
     end
 
-    subgraph N2["NAS · Storage & Review"]
-        G[("PostgreSQL<br/>flows · scores · evidence")] --> H["Dashboard"]
-    end
-
-    B --> C
-    F --> G
+    NAS -- flows --> PC
+    PC -- scores · evidence --> NAS
 
     classDef nas fill:#f6f8fa,stroke:#8c959f,color:#24292f;
     classDef ml fill:#eef4f7,stroke:#587384,color:#243746;
     class A,B,G,H nas;
     class C,D,E,F ml;
-    style N1 fill:#fbfcfd,stroke:#a3adb5,color:#34404a;
+    style NAS fill:#fbfcfd,stroke:#a3adb5,color:#34404a;
     style PC fill:#fbfcfd,stroke:#a3adb5,color:#34404a;
-    style N2 fill:#fbfcfd,stroke:#a3adb5,color:#34404a;
 ```
 
 <!-- Add one dashboard screenshot or GIF here, e.g. ![Dashboard](docs/dashboard.png) -->
