@@ -17,7 +17,7 @@ I build ML systems that detect abnormal behavior in operational data — system 
 ## At a Glance
 
 - **3+ years in operations** — maintained a public-sector Java/Spring (eGovFrame) system; traced incidents across screens, server logic, SQL, data, and WAS logs
-- **M.S. in Data Science, Kookmin University** — graph-based log anomaly detection under *interleaving*
+- **M.S. in Data Science, Kookmin University** — graph-based log anomaly detection using how logs occur in operation (timing, burst, severity)
 - **End-to-end detection system** — NetFlow port-scan detector from packet collection on a NAS to PyTorch/FastAPI inference and a review dashboard (**F1 89.07%** on CIDDS-002 Week2)
 
 ---
@@ -37,39 +37,51 @@ Building a security ML pipeline on top of the course, step by step:
 
 ---
 
-## Research · Interleaved Log Anomaly Detection
+## Research · Log Anomaly Detection
 
-When many tasks run at once, their logs are mixed on one timeline. Sequence models then see transitions that never actually happened.
+**Premise:** the same log message can mean different things about the system depending on **when** it occurs, **how densely** it appears, and **how severe** it is.
+
+**Gap:** Lograph learns log content and the relations between logs through shared entities (IDs, addresses, components) in a Log-Entity Graph. But its log adjacency is just the number of shared entities, so information about **how logs actually occur in operation** is left out.
+
+**Approach:** I redesigned the log adjacency matrix to include that occurrence context, and compared each design under a controlled setup — same data, splits, model, and training, with only the adjacency changed.
 
 ```mermaid
 flowchart LR
-    subgraph TL["One timeline · interleaved"]
-        direction LR
-        L1["L1 · task A"] --> L2["L2 · task B"] --> L3["L3 · task A"] --> L4["L4 · task C"] --> L5["L5 · task A"]
-    end
-    E(("shared<br/>entity A"))
-    E -.-> L1
-    E -.-> L3
-    E -.-> L5
+    A["Lograph adjacency<br/>shared-entity count"]
 
-    classDef log fill:#f6f8fa,stroke:#8c959f,color:#24292f;
-    classDef ent fill:#eef4f7,stroke:#587384,color:#243746;
-    class L1,L2,L3,L4,L5 log;
-    class E ent;
+    subgraph C["Occurrence context"]
+        T["When<br/>temporal weight"]
+        B["How densely<br/>burst score"]
+        L["How severe<br/>log-level weight"]
+    end
+
+    K["Which edges<br/>Top-k sparsification"]
+
+    A --> T
+    A --> B
+    A --> L
+    A --> K
+
+    T --> E
+    B --> E
+    L --> E
+    K --> E
+
+    E["Compared one by one<br/>same model · same data<br/>BGL · Thunderbird · HDFS"]
+
+    classDef base fill:#f6f8fa,stroke:#8c959f,color:#24292f;
+    classDef ctx fill:#eef4f7,stroke:#587384,color:#243746;
+    class A,E,K base;
+    class T,B,L ctx;
+    style C fill:#fbfcfd,stroke:#a3adb5,color:#34404a;
 ```
 
-A **Log-Entity Graph** reconnects related logs through the entities they share (IDs, addresses, components). My thesis asked:
-
-> **What information should decide how strongly two logs are connected?**
-
-I redesigned the log adjacency matrix in four ways and compared them under a controlled setup — same data loader, splits, model, and training, with only the adjacency changed.
-
-| Design | Idea |
-| --- | --- |
-| Temporal weight | Logs closer in time are connected more strongly |
-| Burst score | Emphasize logs in locally dense bursts |
-| Log level | Weight by severity (DEBUG → FATAL) |
-| Top-k | Keep only the strongest edges per log |
+| Design | Question it encodes | How |
+| --- | --- | --- |
+| Temporal weight | *When* did the two logs occur? | Logs closer in time are connected more strongly |
+| Burst score | *How densely* did logs occur? | Emphasize logs inside short, dense bursts — often around state changes or failures |
+| Log level | *How severe* were the logs? | Weight pairs by severity (DEBUG 0.8 → FATAL 2.0) |
+| Top-k | *Which* connections matter? | Keep only the strongest edges per log to remove dense, noisy links |
 
 **F1-score** (single run per setting; best per dataset in bold)
 
@@ -79,7 +91,7 @@ I redesigned the log adjacency matrix in four ways and compared them under a con
 | Thunderbird | 0.9580 | 0.9602 | **0.9769** | 0.9630 | 0.9588 |
 | HDFS | 0.8174 | 0.8282 | 0.8178 | 0.8172 | **0.8342** |
 
-- **Temporal weighting was the only design that beat the baseline on all three datasets** in this setup.
+- **Temporal weighting was the only design that beat the baseline on all three datasets** in this setup — *when* a log occurs was the most robust occurrence signal.
 - The other designs helped on some datasets and hurt on others, so the right adjacency depends on the data's characteristics.
 - Next: repeated runs with mean ± std, and combining signals.
 
