@@ -10,6 +10,10 @@ I build ML systems that detect abnormal behavior in operational data — system 
 [![Portfolio](https://img.shields.io/badge/Portfolio-alephtasks.vercel.app-3F6273?style=flat-square)](https://alephtasks.vercel.app/)
 [![Thesis](https://img.shields.io/badge/Thesis-RISS-536A78?style=flat-square)](https://www.riss.kr/link?id=T17372490)
 
+<br>
+
+<a href="#tech-stack"><img src="https://skillicons.dev/icons?i=python,pytorch,sklearn,fastapi,postgres,docker,linux,git,java,spring&perline=10" alt="Python, PyTorch, scikit-learn, FastAPI, PostgreSQL, Docker, Linux, Git, Java, Spring" /></a>
+
 </div>
 
 ---
@@ -160,12 +164,13 @@ flowchart BT
 
 ## Tech Stack
 
-| Area | Technologies |
-| --- | --- |
-| **ML / Data** | Python, PyTorch, scikit-learn, pandas, NumPy |
-| **Serving / Data store** | FastAPI, PostgreSQL |
-| **Infra / Tools** | Docker, Docker Compose, Linux, Git, Conda, CUDA |
-| **Backend** | Java, Spring Boot, MyBatis, SQL |
+| Area | Technologies | Where I used them |
+| --- | --- | --- |
+| **ML / Data** | Python, PyTorch, scikit-learn, pandas, NumPy | Thesis models and experiments; Transformer training and preprocessing in the port-scan project |
+| **Network** | Scapy | Packet capture, 5-tuple flow aggregation, test traffic generation |
+| **Serving / Data store** | FastAPI, PostgreSQL | Real-time detection API; storage for flows, scores, and rule evidence |
+| **Infra / Tools** | Docker, Docker Compose, Linux, Git, Conda, CUDA | Collector and DB on a Synology NAS; GPU inference on a PC |
+| **Backend** | Java, Spring Boot, MyBatis, SQL | 3+ years of public-sector system maintenance; detection dashboard |
 
 ---
 
