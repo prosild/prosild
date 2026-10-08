@@ -9,6 +9,7 @@ I build ML systems that detect abnormal behavior in operational data — system 
 [![Email](https://img.shields.io/badge/Email-pgilsu93%40gmail.com-245B6B?style=flat-square&logo=gmail&logoColor=white)](mailto:pgilsu93@gmail.com)
 [![About Me](https://img.shields.io/badge/About%20Me-alephtasks.vercel.app-3F6273?style=flat-square)](https://alephtasks.vercel.app/)
 [![Thesis](https://img.shields.io/badge/Thesis-RISS-536A78?style=flat-square)](https://www.riss.kr/link?id=T17372490)
+[![Paper Review](https://img.shields.io/badge/Paper%20Review-Notion-687A86?style=flat-square&logo=notion&logoColor=white)](https://www.notion.so/3f3fdb93808981e7a90ecf5ce7be3795)
 
 <br>
 
@@ -99,6 +100,8 @@ flowchart LR
 - Next: repeated runs with mean ± std, and combining signals.
 
 *인터리빙 환경에서 로그-엔티티 그래프 인접 구조 설계의 비교 분석* · Master's thesis · Kookmin University Graduate School, Data Science · 2026
+
+**How I got here:** the research question came out of a lab-seminar review of 11 log anomaly detection papers — from DeepLog and LogRobust, through Transformer-based models (HitAnomaly, LAnoBERT, LogFormer), to Lograph. I tracked what each one leaves out: information lost in parsing, unseen logs, distribution shift, and finally logs from concurrent tasks interleaving on one timeline. → [Paper review on Notion (Korean)](https://www.notion.so/3f3fdb93808981e7a90ecf5ce7be3795)
 
 ---
 
