@@ -7,7 +7,7 @@
 I build ML systems that detect abnormal behavior in operational data — system logs and network flows — and connect the models to real collection, serving, and storage pipelines.
 
 [![Email](https://img.shields.io/badge/Email-pgilsu93%40gmail.com-245B6B?style=flat-square&logo=gmail&logoColor=white)](mailto:pgilsu93@gmail.com)
-[![Portfolio](https://img.shields.io/badge/Portfolio-alephtasks.vercel.app-3F6273?style=flat-square)](https://alephtasks.vercel.app/)
+[![About Me](https://img.shields.io/badge/Portfolio-alephtasks.vercel.app-3F6273?style=flat-square)](https://alephtasks.vercel.app/)
 [![Thesis](https://img.shields.io/badge/Thesis-RISS-536A78?style=flat-square)](https://www.riss.kr/link?id=T17372490)
 
 <br>
