@@ -54,7 +54,7 @@ Read-only demo of recorded experiment results. The dashboard shows the timestamp
 
 **Premise:** the same log message can mean different things about the system depending on **when** it occurs, **how densely** it appears, and **how severe** it is.
 
-**Temporal weighting was the only design that exceeded the baseline on all three datasets in this experiment** (single run per setting).
+**Temporal weighting was the only design that exceeded the baseline on all three datasets in this experiment**
 
 <details>
 <summary>Research details: motivation, adjacency designs, and results</summary>
