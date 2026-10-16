@@ -27,6 +27,16 @@ I build ML systems that detect abnormal behavior in operational data — system 
 
 ---
 
+## Featured Project · NetFlow Port Scan Detection
+
+A packet-to-dashboard detection system: Scapy collection on a NAS → PyTorch/FastAPI inference on a GPU PC → PostgreSQL storage and a Spring Boot dashboard. A lightweight Transformer combined with explicit scan rules achieved **F1 89.07% on CIDDS-002 Week2**.
+
+[Detection repository](https://github.com/prosild/netflow_portscan_detection) · [Dashboard repository](https://github.com/prosild/NexusPortal) · [Interactive Demo](https://psdev93.synology.me/portfolio/portscan) · [Project details](#project--netflow-port-scan-detection)
+
+Read-only demo of recorded experiment results. The dashboard shows the timestamp of the displayed data.
+
+---
+
 ## Now
 
 - **Course:** SKT K-New Deal Academy · ALEPH — security operations fundamentals, until Dec 2026
@@ -43,6 +53,11 @@ I build ML systems that detect abnormal behavior in operational data — system 
 ## Research · Log Anomaly Detection
 
 **Premise:** the same log message can mean different things about the system depending on **when** it occurs, **how densely** it appears, and **how severe** it is.
+
+**Temporal weighting was the only design that exceeded the baseline on all three datasets in this experiment** (single run per setting).
+
+<details>
+<summary>Research details: motivation, adjacency designs, and results</summary>
 
 **Gap:** Lograph learns log content and the relations between logs through shared entities (IDs, addresses, components) in a Log-Entity Graph. But its log adjacency is just the number of shared entities, so information about **how logs actually occur in operation** is left out.
 
@@ -95,13 +110,14 @@ flowchart LR
 | Thunderbird | 0.9580 | 0.9602 | **0.9769** | 0.9630 | 0.9588 |
 | HDFS | 0.8174 | 0.8282 | 0.8178 | 0.8172 | **0.8342** |
 
-- **Temporal weighting was the only design that beat the baseline on all three datasets** in this setup — *when* a log occurs was the most robust occurrence signal.
 - The other designs helped on some datasets and hurt on others, so the right adjacency depends on the data's characteristics.
 - Next: repeated runs with mean ± std, and combining signals.
 
 *인터리빙 환경에서 로그-엔티티 그래프 인접 구조 설계의 비교 분석* · Master's thesis · Kookmin University Graduate School, Data Science · 2026
 
 **How I got here:** the research question came out of a lab-seminar review of 11 log anomaly detection papers — from DeepLog and LogRobust, through Transformer-based models (HitAnomaly, LAnoBERT, LogFormer), to Lograph. I tracked what each one leaves out: information lost in parsing, unseen logs, distribution shift, and finally logs from concurrent tasks interleaving on one timeline. → [Paper review on Notion (Korean)](https://www.notion.so/3f3fdb93808981e7a90ecf5ce7be3795)
+
+</details>
 
 ---
 
@@ -161,7 +177,9 @@ flowchart BT
 
 [![Repository](https://img.shields.io/badge/Detection-Repository-181717?style=flat-square&logo=github)](https://github.com/prosild/netflow_portscan_detection)
 [![Dashboard](https://img.shields.io/badge/Dashboard-Repository-181717?style=flat-square&logo=github)](https://github.com/prosild/NexusPortal)
-[![Demo](https://img.shields.io/badge/Live-Dashboard-2F6B8A?style=flat-square)](https://psdev93.synology.me/portfolio/portscan)
+[![Interactive Demo](https://img.shields.io/badge/Interactive-Demo-2F6B8A?style=flat-square)](https://psdev93.synology.me/portfolio/portscan)
+
+Read-only demo of recorded experiment results. The dashboard shows the timestamp of the displayed data.
 
 ---
 
@@ -180,3 +198,4 @@ flowchart BT
 ## Interests
 
 Log and network anomaly detection · graph learning on operational data · robustness under distribution shift · reproducible ML pipelines, serving, and monitoring for security operations
+
