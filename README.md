@@ -252,13 +252,13 @@ CIDDS-002는 모의 환경에서 만든 데이터입니다. 실제 트래픽에�
 
 | 영⁠역 | 기술 |
 | --- | --- |
-| M⁠L / 데⁠이⁠터 | Python, PyTorch, PyTorch Geometric, scikit-learn, PySpark, pandas, NumPy |
-| 네⁠트⁠워⁠크 | Zeek, Scapy, tcpdump |
-| M⁠L⁠O⁠p⁠s / 서⁠빙 | MLflow, FastAPI, Docker, Docker Compose |
-| L⁠L⁠M | LangGraph, pgvector |
-| 저⁠장 | PostgreSQL |
-| 백⁠엔⁠드 | Java, Spring Boot, MyBatis, SQL |
-| 인⁠프⁠라 | Linux, Git, VMware, Synology NAS, CUDA |
+| ML / Data | Python, PyTorch, PyTorch Geometric, scikit-learn, PySpark, pandas, NumPy |
+| Network | Zeek, Scapy, tcpdump |
+| MLOps / Serving | MLflow, FastAPI, Docker, Docker Compose |
+| LLM | LangGraph, pgvector |
+| Database | PostgreSQL |
+| Backend | Java, Spring Boot, MyBatis, SQL |
+| Infra | Linux, Git, VMware, Synology NAS |
 
 ---
 
