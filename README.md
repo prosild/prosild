@@ -24,12 +24,12 @@
 
 웹 시스템 개발과 운영, ML 연구, 네트워크와 보안 공부를 차례로 거쳤고 지금은 이 경험을 보안 이상탐지 한 곳에 모아서 씁니다. 탐지 모델을 만드는 일과 그 모델을 운영하는 일을 나누지 않고 한 프로젝트 안에서 같이 합니다. 로그가 어떤 환경에서 왜 남는지 이해하고 문제와 평가 방법을 정하는 데서 시작해 같은 계산이 운영에서도 그대로 돌도록 묶어 배포하는 데까지 갑니다.
 
-<table>
-<tr><th align="left">학부</th><td>경영정보학을 전공해 프로그래밍, 데이터베이스 모델링, 시스템 분석과 설계를 배웠습니다.</td></tr>
-<tr><th align="left">2019&nbsp;~&nbsp;2022</th><td>공공기관의 전자정부프레임워크(Spring, MyBatis) 시스템을 3년 3개월 유지보수했습니다. 내부망에서 WEB 서버와 WAS(JBoss)가 분리된 환경이었고 형상 관리는 SVN으로 했습니다. 기능 수정, 신규 게시판 개발, SQL 수정이 주된 일이었습니다. 접속이 몰리는 날에는 서버 자원 추이와 WAS 로그, 에러 로그를 확인했습니다.</td></tr>
-<tr><th align="left">석사</th><td>국민대학교 일반대학원에서 데이터사이언스를 전공했습니다. 운영하면서 로그를 읽던 경험이 연구 주제로 이어졌습니다. 로그가 발생하는 방식(시점, 몰림, 심각도)을 그래프 기반 로그 이상탐지의 인접행렬에 넣고 세 데이터셋에서 비교했습니다.</td></tr>
-<tr><th align="left">지금</th><td>Zeek 네트워크 로그에서 내부 자산의 행동 이상을 찾는 파이프라인을 만듭니다. 수집, 탐지, LLM 조사, 관제 대시보드가 격리 실습망에서 한 번에 이어져 돕니다.</td></tr>
-</table>
+| 시⁠기 | 내용 |
+| --- | --- |
+| 학⁠부 | 경영정보학을 전공해 프로그래밍, 데이터베이스 모델링, 시스템 분석과 설계를 배웠습니다. |
+| 2⁠0⁠1⁠9 ~ 2⁠0⁠2⁠2 | 공공기관의 전자정부프레임워크(Spring, MyBatis) 시스템을 3년 3개월 유지보수했습니다. 내부망에서 WEB 서버와 WAS(JBoss)가 분리된 환경이었고 형상 관리는 SVN으로 했습니다. 기능 수정, 신규 게시판 개발, SQL 수정이 주된 일이었습니다. 접속이 몰리는 날에는 서버 자원 추이와 WAS 로그, 에러 로그를 확인했습니다. |
+| 석⁠사 | 국민대학교 일반대학원에서 데이터사이언스를 전공했습니다. 운영하면서 로그를 읽던 경험이 연구 주제로 이어졌습니다. 로그가 발생하는 방식(시점, 몰림, 심각도)을 그래프 기반 로그 이상탐지의 인접행렬에 넣고 세 데이터셋에서 비교했습니다. |
+| 지⁠금 | Zeek 네트워크 로그에서 내부 자산의 행동 이상을 찾는 파이프라인을 만듭니다. 수집, 탐지, LLM 조사, 관제 대시보드가 격리 실습망에서 한 번에 이어져 돕니다. |
 
 ---
 
@@ -43,12 +43,12 @@ rule로는 잡기 어려운 내부망의 행동 이상(정찰, 측면 이동, be
 
 ![zeek_AD 구조: 공개 데이터로 모델을 만드는 흐름과 격리 실습망에서 실제 트래픽을 처리하는 흐름](https://raw.githubusercontent.com/prosild/zeek_AD/main/docs/figures/architecture.png)
 
-<table>
-<tr><th align="left">기간</th><td>2026.11 ~ 현재</td></tr>
-<tr><th align="left">저장소</th><td><a href="https://github.com/prosild/zeek_AD">zeek_AD</a> (탐지, 조사 에이전트), <a href="https://github.com/prosild/zeek_ad_dashboard">zeek_ad_dashboard</a> (관제 대시보드)</td></tr>
-<tr><th align="left">데모</th><td><a href="https://soc.psdev93.synology.me">soc.psdev93.synology.me</a> 읽기 전용 계정 <code>demo</code> / <code>WTYdSaRDUfjT3jr9cAw2</code></td></tr>
-<tr><th align="left">기술</th><td>Python, PyTorch, PyTorch Geometric, PySpark, Zeek, MLflow, LangGraph, PostgreSQL(pgvector), FastAPI, Spring Boot, Docker</td></tr>
-</table>
+| 항⁠목 | 내용 |
+| --- | --- |
+| 기⁠간 | 2026.11 ~ 현재 |
+| 저⁠장⁠소 | [zeek_AD](https://github.com/prosild/zeek_AD) (탐지, 조사 에이전트), [zeek_ad_dashboard](https://github.com/prosild/zeek_ad_dashboard) (관제 대시보드) |
+| 데⁠모 | [soc.psdev93.synology.me](https://soc.psdev93.synology.me) 읽기 전용 계정 `demo` / `WTYdSaRDUfjT3jr9cAw2` |
+| 기⁠술 | Python, PyTorch, PyTorch Geometric, PySpark, Zeek, MLflow, LangGraph, PostgreSQL(pgvector), FastAPI, Spring Boot, Docker |
 
 세 모델을 결합한 조사 순위는 공개 데이터의 공격 사건 16건 중 14건, APT 합성 패턴 20건 중 13건을 하루 상위 50건 안에 올렸습니다. 상위 10건에서는 자리가 모델 수만큼 나뉘어 가장 잘한 단일 모델보다 낮았습니다. 표본이 작아 모델 간 차이는 확정할 수 없습니다.
 
@@ -132,44 +132,14 @@ Lograph는 로그 내용과 함께 공유 엔티티(ID, 주소, 컴포넌트)로
 
 이 빈자리를 하나씩 채우는 인접행렬 설계 네 가지를 만들었습니다. 어느 설계의 효과인지 가려내려고 데이터, 분할, 모델, 학습 설정은 그대로 두고 인접행렬 생성 단계만 바꿨습니다.
 
-```mermaid
-%%{init: {"flowchart": {"nodeSpacing": 14, "rankSpacing": 36, "padding": 6}, "themeVariables": {"fontSize": "13px"}}}%%
-flowchart LR
-    A["Lograph 인접행렬<br/>공유 엔티티 수"]
-
-    subgraph C["발생 맥락"]
-        T["언제 · 시간 가중"]
-        B["얼마나 몰려서 · 버스트 점수"]
-        L["얼마나 심각하게 · 로그 레벨 가중"]
-    end
-
-    K["어떤 연결을 · Top-k 희소화"]
-
-    A --> T
-    A --> B
-    A --> L
-    A --> K
-
-    T --> E
-    B --> E
-    L --> E
-    K --> E
-
-    E["하나씩 비교<br/>BGL · Thunderbird · HDFS"]
-
-    classDef base fill:#f6f8fa,stroke:#8c959f,color:#24292f;
-    classDef ctx fill:#eef4f7,stroke:#587384,color:#243746;
-    class A,E,K base;
-    class T,B,L ctx;
-    style C fill:#fbfcfd,stroke:#a3adb5,color:#34404a;
-```
+![통제 실험의 구조: 로그, 전처리, 임베딩, 그래프 어텐션, 이상 판정은 모든 조건에서 같고 인접행렬 생성 단계만 기준 모델과 설계 네 가지로 하나씩 교체](assets/thesis-experiment.png)
 
 | 설계 | 담는 질문 | 방법 |
 | --- | --- | --- |
-| 시간 가중 | 두 로그가 언제 발생했나 | 시간이 가까운 로그일수록 강하게 연결 |
-| 버스트 점수 | 로그가 얼마나 몰려서 나왔나 | 짧은 시간에 로그가 몰린 구간을 강조. 상태 변화나 장애 근처에서 자주 나타남 |
-| 로그 레벨 가중 | 로그가 얼마나 심각했나 | 심각도에 따라 가중 (DEBUG 0.8 → FATAL 2.0) |
-| Top-k 희소화 | 어떤 연결이 중요한가 | 로그마다 강한 연결만 남겨 촘촘하고 잡음 많은 연결을 제거 |
+| 시⁠간 가⁠중 | 두 로그가 언제 발생했나 | 시간이 가까운 로그일수록 강하게 연결 |
+| 버⁠스⁠트 점⁠수 | 로그가 얼마나 몰려서 나왔나 | 짧은 시간에 로그가 몰린 구간을 강조. 상태 변화나 장애 근처에서 자주 나타남 |
+| 로⁠그 레⁠벨 가⁠중 | 로그가 얼마나 심각했나 | 심각도에 따라 가중 (DEBUG 0.8 → FATAL 2.0) |
+| T⁠o⁠p⁠-⁠k 희⁠소⁠화 | 어떤 연결이 중요한가 | 로그마다 강한 연결만 남겨 촘촘하고 잡음 많은 연결을 제거 |
 
 F1-score입니다. 설정마다 한 번씩 실행했고 데이터셋별 최고값을 굵게 표시했습니다.
 
@@ -194,10 +164,20 @@ F1-score입니다. 설정마다 한 번씩 실행했고 데이터셋별 최고�
 
 AI에 구현을 맡길 때 사람이 정할 것과 확인할 것을 원칙으로 정리하고 이를 지침, 검증 스크립트, 실행 전 훅으로 옮긴 개인용 작업 체계입니다. 규칙을 늘리면 정상 작업까지 막히고 줄이면 결과를 믿기 어려워서 여러 번 고쳤습니다. 지금은 실제로 실패를 겪은 경우에만 차단 규칙을 두고 결과는 구현한 세션 밖에서 검증 스크립트와 별도 검토 세션으로 확인합니다.
 
-- 완료 여부는 작업 세션의 보고 대신 검증 스크립트가 검사 명령을 직접 실행해 판정합니다. 초기 검증 11회가 모두 빌드 캐시만 다시 쓴 실행이었는데 통과로 기록된 것을 발견했고 그 뒤로는 테스트가 실제로 돌지 않으면 실패로 판정합니다.
-- 설계 대화를 모르는 검토 세션이 스펙, 실행 출력, 변경 내역만 읽고 빈틈을 찾습니다. zeek_AD 대시보드에서는 이 검토로 두 가지를 고쳤습니다. 클라이언트 헤더를 그대로 믿어 감사 로그의 접속 IP를 위조할 수 있던 문제와 낮은 권한 계정에 사용자 이름이 노출될 수 있던 경로입니다.
-- 세 에이전트 CLI(Claude Code, Codex, Antigravity)에 공통으로 걸리는 실행 전 훅이 자격증명 파일 열람, 권한 우회 옵션, 자기 권한 설정 변경, 반복 호출을 걸러 냅니다. 훅은 명령 문자열만 보는 검사라 우회할 수 있어서 실제 차단은 세션별 권한과 브랜치 보호에 맡겼습니다.
-- 취약점 스캔의 심각 등급 2건이 사람에게 결정 사항으로 올라오지 않은 채 수락된 일이 있었습니다. 그 뒤로 잔여 위험을 수락할지는 사람이 정합니다.
+![agent-kit의 작업 흐름: 사람과 설계 세션이 스펙을 만들고 작업 세션이 구현하며 검증 스크립트와 검토 세션을 거쳐 사람이 수락](assets/agent-kit-flow.png)
+
+| 원⁠칙 | 구현 |
+| --- | --- |
+| 만⁠든 쪽⁠과 확⁠인⁠하⁠는 쪽⁠을 나⁠눈⁠다 | 설계 대화를 모르는 별도 세션이 스펙, 실행 출력, 변경 내역만 읽고 빈틈을 찾음 |
+| 완⁠료⁠는 실⁠행⁠한 근⁠거⁠로 판⁠단⁠한⁠다 | 작업 세션의 보고 대신 검증 스크립트가 검사 명령을 직접 실행해 종료 코드, 테스트 실행 여부, 커밋되지 않은 변경으로 판정 |
+| 사⁠람⁠이 정⁠하⁠는 것⁠은 사⁠람⁠에⁠게 남⁠긴⁠다 | 완료 기준, 목표와 범위 변경, 절충, 되돌리기 어려운 일, 잔여 위험 수락은 사람이 결정 |
+| 가⁠볍⁠게 유⁠지⁠한⁠다 | 금지와 절차 규칙은 실제로 겪은 실패를 막을 때만 두고 규칙을 늘릴 때는 중복과 옛 규칙을 함께 덜어냄 |
+| 검⁠토⁠와 승⁠인⁠은 위⁠험⁠과 크⁠기⁠에 비⁠례⁠한⁠다 | 작은 작업은 검토 없이 바로 맡기고 보안, 권한, 데이터 무결성, 외부 배포는 빈틈 검토와 완료 전 검토를 받음 |
+| 금⁠지⁠는 훅⁠으⁠로⁠, 강⁠제⁠는 권⁠한⁠으⁠로 | 실행 전 훅은 실제로 일어난 실수만 막고 실제 차단은 세션별 권한과 브랜치 보호에 맡김 |
+| 상⁠태⁠와 기⁠억⁠은 파⁠일⁠에 둔⁠다 | 진행 상태와 결정 이유를 파일에 남겨 세션이나 모델을 바꿔도 이어서 진행 |
+| 설⁠계⁠자⁠의 주⁠의⁠력⁠이 가⁠장 귀⁠하⁠다 | 항상 읽는 지침은 14KB 이하로 두고 절차, 예외, 회고는 필요할 때만 읽는 문서로 분리 |
+
+독립 검토 구조는 Google이 공개한 EGM을 따랐습니다. 겪은 실패를 작업 체계의 문제와 그 프로젝트만의 문제로 나누는 구분은 Google Research의 Harness²에서 가져왔습니다.
 
 ---
 
@@ -207,10 +187,10 @@ AI에 구현을 맡길 때 사람이 정할 것과 확인할 것을 원칙으로
 
 패킷 수집에서 대시보드까지 이어지는 탐지 시스템입니다. 명시적인 스캔 규칙과 30초 flow 윈도우를 분류하는 경량 Transformer를 함께 씁니다. 수집과 저장은 NAS에서 상시로 돌고 학습과 추론은 GPU PC에서 합니다. CIDDS-002 Week2에서 F1 89.07%가 나왔습니다.
 
-<table>
-<tr><th align="left">저장소</th><td><a href="https://github.com/prosild/netflow_portscan_detection">netflow_portscan_detection</a> (탐지), <a href="https://github.com/prosild/NexusPortal">NexusPortal</a> (대시보드)</td></tr>
-<tr><th align="left">데모</th><td><a href="https://psdev93.synology.me/portfolio/portscan">psdev93.synology.me/portfolio/portscan</a> 기록해 둔 실험 결과를 보여 주는 읽기 전용 화면이고 표시된 데이터의 시각이 함께 나옵니다</td></tr>
-</table>
+| 항⁠목 | 내용 |
+| --- | --- |
+| 저⁠장⁠소 | [netflow_portscan_detection](https://github.com/prosild/netflow_portscan_detection) (탐지), [NexusPortal](https://github.com/prosild/NexusPortal) (대시보드) |
+| 데⁠모 | [psdev93.synology.me/portfolio/portscan](https://psdev93.synology.me/portfolio/portscan) 기록해 둔 실험 결과를 보여 주는 읽기 전용 화면이고 표시된 데이터의 시각이 함께 나옵니다 |
 
 <details>
 <summary>구조, 설계 결정, 평가 결과 펼치기</summary>
@@ -268,15 +248,15 @@ CIDDS-002는 모의 환경에서 만든 데이터입니다. 실제 트래픽에�
 
 ## 기술 스택
 
-| 영역 | 기술 | 사용한 곳 |
-| --- | --- | --- |
-| ML / 데이터 | Python, PyTorch, PyTorch Geometric, scikit-learn, PySpark, pandas, NumPy | 논문 모델과 실험, zeek_AD의 전처리와 Transformer, 시간 그래프 모델 |
-| 네트워크 | Zeek, Scapy, tcpdump | PCAP을 Zeek 로그로 처리, 패킷 수집과 flow 집계, 실습망 캡처 |
-| MLOps / 서빙 | MLflow, FastAPI, Docker, Docker Compose | 모델과 전처리와 임계값의 묶음 등록, 추론 API와 근거 API |
-| LLM | LangGraph, pgvector | 조사 에이전트, ATT&CK 기법 검색 |
-| 저장 | PostgreSQL | flow, 점수, 조사 후보, 근거, 사건 상태 |
-| 백엔드 | Java, Spring Boot, MyBatis, SQL | 공공 시스템 유지보수, 관제 대시보드 |
-| 인프라 | Linux, Git, VMware, Synology NAS, CUDA | 격리 실습망, NAS 수집과 배포, GPU 학습과 추론 |
+| 영⁠역 | 기술 |
+| --- | --- |
+| M⁠L / 데⁠이⁠터 | Python, PyTorch, PyTorch Geometric, scikit-learn, PySpark, pandas, NumPy |
+| 네⁠트⁠워⁠크 | Zeek, Scapy, tcpdump |
+| M⁠L⁠O⁠p⁠s / 서⁠빙 | MLflow, FastAPI, Docker, Docker Compose |
+| L⁠L⁠M | LangGraph, pgvector |
+| 저⁠장 | PostgreSQL |
+| 백⁠엔⁠드 | Java, Spring Boot, MyBatis, SQL |
+| 인⁠프⁠라 | Linux, Git, VMware, Synology NAS, CUDA |
 
 ---
 
