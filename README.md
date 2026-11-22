@@ -24,15 +24,12 @@
 
 웹 시스템 개발과 운영, ML 연구, 네트워크와 보안 공부를 차례로 거쳤고 지금은 이 경험을 보안 이상탐지 한 곳에 모아서 씁니다. 탐지 모델을 만드는 일과 그 모델을 운영하는 일을 나누지 않고 한 프로젝트 안에서 같이 합니다. 로그가 어떤 환경에서 왜 남는지 이해하고 문제와 평가 방법을 정하는 데서 시작해 같은 계산이 운영에서도 그대로 돌도록 묶어 배포하는 데까지 갑니다.
 
-| | |
-| --- | --- |
-| 학부 | 경영정보학을 전공해 프로그래밍, 데이터베이스 모델링, 시스템 분석과 설계를 배웠습니다. |
-| 2019 ~ 2022 | 공공기관의 전자정부프레임워크(Spring, MyBatis) 시스템을 3년 3개월 유지보수했습니다. 내부망에서 WEB 서버와 WAS(JBoss)가 분리된 환경이었고 형상 관리는 SVN으로 했습니다. 기능 수정, 신규 게시판 개발, SQL 수정이 주된 일이었습니다. 접속이 몰리는 날에는 서버 자원 추이와 WAS 로그, 에러 로그를 확인했습니다. |
-| 석사 | 국민대학교 일반대학원에서 데이터사이언스를 전공했습니다. 운영하면서 로그를 읽던 경험이 연구 주제로 이어졌습니다. 로그가 발생하는 방식(시점, 몰림, 심각도)을 그래프 기반 로그 이상탐지의 인접행렬에 넣고 세 데이터셋에서 비교했습니다. |
-| 지금 | Zeek 네트워크 로그에서 내부 자산의 행동 이상을 찾는 파이프라인을 만듭니다. 수집, 탐지, LLM 조사, 관제 대시보드가 격리 실습망에서 한 번에 이어져 돕니다. |
-| 자격 | 정보처리기사, 데이터분석 준전문가(ADsP)가 있습니다. 네트워크관리사 2급 필기와 리눅스마스터 2급 1차에 합격했고 남은 시험을 준비합니다. |
-
-보안 분야의 ML/MLOps 엔지니어 자리를 찾고 있습니다. 연락은 위의 이메일로 주시면 됩니다.
+<table>
+<tr><th align="left">학부</th><td>경영정보학을 전공해 프로그래밍, 데이터베이스 모델링, 시스템 분석과 설계를 배웠습니다.</td></tr>
+<tr><th align="left">2019&nbsp;~&nbsp;2022</th><td>공공기관의 전자정부프레임워크(Spring, MyBatis) 시스템을 3년 3개월 유지보수했습니다. 내부망에서 WEB 서버와 WAS(JBoss)가 분리된 환경이었고 형상 관리는 SVN으로 했습니다. 기능 수정, 신규 게시판 개발, SQL 수정이 주된 일이었습니다. 접속이 몰리는 날에는 서버 자원 추이와 WAS 로그, 에러 로그를 확인했습니다.</td></tr>
+<tr><th align="left">석사</th><td>국민대학교 일반대학원에서 데이터사이언스를 전공했습니다. 운영하면서 로그를 읽던 경험이 연구 주제로 이어졌습니다. 로그가 발생하는 방식(시점, 몰림, 심각도)을 그래프 기반 로그 이상탐지의 인접행렬에 넣고 세 데이터셋에서 비교했습니다.</td></tr>
+<tr><th align="left">지금</th><td>Zeek 네트워크 로그에서 내부 자산의 행동 이상을 찾는 파이프라인을 만듭니다. 수집, 탐지, LLM 조사, 관제 대시보드가 격리 실습망에서 한 번에 이어져 돕니다.</td></tr>
+</table>
 
 ---
 
@@ -46,12 +43,12 @@ rule로는 잡기 어려운 내부망의 행동 이상(정찰, 측면 이동, be
 
 ![zeek_AD 구조: 공개 데이터로 모델을 만드는 흐름과 격리 실습망에서 실제 트래픽을 처리하는 흐름](https://raw.githubusercontent.com/prosild/zeek_AD/main/docs/figures/architecture.png)
 
-| | |
-| --- | --- |
-| 기간 | 2026.11 ~ 현재 |
-| 저장소 | [zeek_AD](https://github.com/prosild/zeek_AD) (탐지, 조사 에이전트), [zeek_ad_dashboard](https://github.com/prosild/zeek_ad_dashboard) (관제 대시보드) |
-| 데모 | [soc.psdev93.synology.me](https://soc.psdev93.synology.me) 읽기 전용 계정 `demo` / `WTYdSaRDUfjT3jr9cAw2` |
-| 기술 | Python, PyTorch, PyTorch Geometric, PySpark, Zeek, MLflow, LangGraph, PostgreSQL(pgvector), FastAPI, Spring Boot, Docker |
+<table>
+<tr><th align="left">기간</th><td>2026.11 ~ 현재</td></tr>
+<tr><th align="left">저장소</th><td><a href="https://github.com/prosild/zeek_AD">zeek_AD</a> (탐지, 조사 에이전트), <a href="https://github.com/prosild/zeek_ad_dashboard">zeek_ad_dashboard</a> (관제 대시보드)</td></tr>
+<tr><th align="left">데모</th><td><a href="https://soc.psdev93.synology.me">soc.psdev93.synology.me</a> 읽기 전용 계정 <code>demo</code> / <code>WTYdSaRDUfjT3jr9cAw2</code></td></tr>
+<tr><th align="left">기술</th><td>Python, PyTorch, PyTorch Geometric, PySpark, Zeek, MLflow, LangGraph, PostgreSQL(pgvector), FastAPI, Spring Boot, Docker</td></tr>
+</table>
 
 세 모델을 결합한 조사 순위는 공개 데이터의 공격 사건 16건 중 14건, APT 합성 패턴 20건 중 13건을 하루 상위 50건 안에 올렸습니다. 상위 10건에서는 자리가 모델 수만큼 나뉘어 가장 잘한 단일 모델보다 낮았습니다. 표본이 작아 모델 간 차이는 확정할 수 없습니다.
 
@@ -210,10 +207,10 @@ AI에 구현을 맡길 때 사람이 정할 것과 확인할 것을 원칙으로
 
 패킷 수집에서 대시보드까지 이어지는 탐지 시스템입니다. 명시적인 스캔 규칙과 30초 flow 윈도우를 분류하는 경량 Transformer를 함께 씁니다. 수집과 저장은 NAS에서 상시로 돌고 학습과 추론은 GPU PC에서 합니다. CIDDS-002 Week2에서 F1 89.07%가 나왔습니다.
 
-| | |
-| --- | --- |
-| 저장소 | [netflow_portscan_detection](https://github.com/prosild/netflow_portscan_detection) (탐지), [NexusPortal](https://github.com/prosild/NexusPortal) (대시보드) |
-| 데모 | [psdev93.synology.me/portfolio/portscan](https://psdev93.synology.me/portfolio/portscan) 기록해 둔 실험 결과를 보여 주는 읽기 전용 화면이고 표시된 데이터의 시각이 함께 나옵니다 |
+<table>
+<tr><th align="left">저장소</th><td><a href="https://github.com/prosild/netflow_portscan_detection">netflow_portscan_detection</a> (탐지), <a href="https://github.com/prosild/NexusPortal">NexusPortal</a> (대시보드)</td></tr>
+<tr><th align="left">데모</th><td><a href="https://psdev93.synology.me/portfolio/portscan">psdev93.synology.me/portfolio/portscan</a> 기록해 둔 실험 결과를 보여 주는 읽기 전용 화면이고 표시된 데이터의 시각이 함께 나옵니다</td></tr>
+</table>
 
 <details>
 <summary>구조, 설계 결정, 평가 결과 펼치기</summary>
