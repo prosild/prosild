@@ -47,7 +47,7 @@ rule로는 잡기 어려운 내부망의 행동 이상(정찰, 측면 이동, be
 | --- | --- |
 | 기⁠간 | 2026.11 ~ 현재 |
 | 저⁠장⁠소 | [zeek_AD](https://github.com/prosild/zeek_AD) (탐지, 조사 에이전트), [zeek_ad_dashboard](https://github.com/prosild/zeek_ad_dashboard) (관제 대시보드) |
-| 데⁠모 | [soc.psdev93.synology.me](https://soc.psdev93.synology.me) 읽기 전용 계정 `demo` / `WTYdSaRDUfjT3jr9cAw2` |
+| 데⁠모 | [soc.psdev93.synology.me](https://soc.psdev93.synology.me) 조회자 `demo` / `WTYdSaRDUfjT3jr9cAw2`, 분석가 체험 `trial-analyst` / `xonF89YKMMMBG7nesqS7` (바꾼 내용은 매시 정각에 되돌림) |
 
 세 모델을 결합하면 공개 데이터(CIC-IDS-2017)의 공격 사건 16건 중 14건, APT 합성 패턴 20건 중 13건이 하루 상위 50건에 들었습니다. 합성 패턴 중 통계 베이스라인이 평가 나흘 내내 놓친 HTTPS beaconing을 시간 그래프 모델은 사흘 상위 50에 올렸습니다. 베이스라인이 하루만 올린 측면 이동은 Transformer가 나흘 모두 올렸습니다. 순위를 번갈아 뽑는 방식이라 상위 10건에서는 단일 모델 최고치보다 낮았습니다.
 
