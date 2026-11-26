@@ -35,18 +35,18 @@
 
 ## 대표 프로젝트
 
-### Zeek 네트워크 로그 이상탐지와 LLM 조사 에이전트 (zeek_AD)
+### 네트워크 행동 이상탐지(NBAD)와 LLM 조사 에이전트
 
 내부망에서 rule이 없는 행동 이상(측면 이동, beaconing, 느린 유출)을 Zeek 로그에서 찾아 분석가가 조사할 순서를 매기는 시스템입니다. 정상 트래픽만 학습한 통계 베이스라인, Transformer, 시간 그래프 모델이 각각 점 이상, 문맥 이상, 관계 이상을 맡습니다. 상위 건에는 LLM 에이전트가 근거와 MITRE ATT&CK 기법 후보를 붙입니다.
 
 풀 문제와 모델 구성은 직접 정했고 평가 방법과 파이프라인 구조는 AI가 낸 설계안에 질문과 수정을 거듭해 함께 확정했습니다. 구현에는 AI 코딩 에이전트(Claude Code, Codex)를 활용했습니다. Transformer 모델, 그리고 시간 그래프 모델의 엣지 인코더, 임베딩, 디코더, 손실은 실습 노트북에서 직접 작성했습니다.
 
-![zeek_AD 구조: 공개 데이터로 모델을 만드는 흐름과 VMware 격리 실습망에서 실제 트래픽을 처리하는 흐름](https://raw.githubusercontent.com/prosild/zeek_AD/main/docs/figures/architecture.png)
+![NBAD 구조: 공개 데이터로 모델을 만드는 흐름과 VMware 격리 실습망에서 실제 트래픽을 처리하는 흐름](https://raw.githubusercontent.com/prosild/network-behavior-anomaly-detection/main/docs/figures/architecture.png)
 
 | 항⁠목 | 내용 |
 | --- | --- |
 | 기⁠간 | 2026.11 ~ 현재 |
-| 저⁠장⁠소 | [zeek_AD](https://github.com/prosild/zeek_AD) (탐지, 조사 에이전트), [zeek_ad_dashboard](https://github.com/prosild/zeek_ad_dashboard) (관제 대시보드) |
+| 저⁠장⁠소 | [network-behavior-anomaly-detection](https://github.com/prosild/network-behavior-anomaly-detection) (탐지, 조사 에이전트), [nbad-dashboard](https://github.com/prosild/nbad-dashboard) (관제 대시보드) |
 | 데⁠모 | [soc.psdev93.synology.me](https://soc.psdev93.synology.me) 조회자 `demo` / `WTYdSaRDUfjT3jr9cAw2`, 분석가 체험 `trial-analyst` / `xonF89YKMMMBG7nesqS7` (바꾼 내용은 매시 정각에 되돌림) |
 
 세 모델을 결합하면 공개 데이터(CIC-IDS-2017)의 공격 사건 16건 중 14건, APT 합성 패턴 20건 중 13건이 하루 상위 50건에 들었습니다. 합성 패턴 중 통계 베이스라인이 평가 나흘 내내 놓친 HTTPS beaconing을 시간 그래프 모델은 사흘 상위 50에 올렸습니다. 베이스라인이 하루만 올린 측면 이동은 Transformer가 나흘 모두 올렸습니다. 순위를 번갈아 뽑는 방식이라 상위 10건에서는 단일 모델 최고치보다 낮았습니다.
@@ -125,7 +125,7 @@ LLM은 탐지에 쓰지 않고 상위 후보를 조사하는 데만 씁니다. �
 
 관제 대시보드(Spring Boot)에는 역할별 권한, 마스킹, 감사 로그를 적용했습니다.
 
-[![zeek_AD 관제 대시보드 현황판](https://raw.githubusercontent.com/prosild/zeek_ad_dashboard/main/docs/images/01-viewer-dashboard.png)](https://soc.psdev93.synology.me)
+[![NBAD 관제 대시보드 현황판](https://raw.githubusercontent.com/prosild/nbad-dashboard/main/docs/images/01-viewer-dashboard.png)](https://soc.psdev93.synology.me)
 
 </details>
 
@@ -141,7 +141,7 @@ LLM은 탐지에 쓰지 않고 상위 후보를 조사하는 데만 씁니다. �
 - 데이터셋마다 기준 모델보다 F1이 높은 설계가 있었습니다(반복 실험의 평균). BGL은 시간 가중(0.9268 → 0.9307), Thunderbird는 버스트 점수(0.9580 → 0.9769), HDFS는 Top-k 희소화(0.8174 → 0.8342)가 가장 높았습니다.
 - 시간 가중은 세 데이터셋 모두에서 기준 모델보다 높았습니다. 가장 높은 설계는 데이터셋마다 달라서 인접 구조의 효과가 데이터 특성에 좌우된다고 해석했습니다.
 
-zeek_AD와 이 연구는 한 탐지 체계의 두 단계로 구상했습니다. 네트워크 로그에서 이상 행동이 보인 자산을 먼저 찾고 그 자산의 시스템 로그를 그래프 기반 로그 이상탐지로 확인하는 구조이고 두 단계를 잇는 부분이 남은 작업입니다.
+위 대표 프로젝트(NBAD)와 이 연구는 한 탐지 체계의 두 단계로 구상했습니다. 네트워크 로그에서 이상 행동이 보인 자산을 먼저 찾고 그 자산의 시스템 로그를 그래프 기반 로그 이상탐지로 확인하는 구조이고 두 단계를 잇는 부분이 남은 작업입니다.
 
 *인터리빙 환경에서 로그-엔티티 그래프 인접 구조 설계의 비교 분석*, 석사학위 논문, 국민대학교 일반대학원 데이터사이언스 전공, 2026 ([RISS](https://www.riss.kr/link?id=T17372490))
 
@@ -185,7 +185,7 @@ AI에 구현을 맡길 때 사람이 정할 것과 확인할 것을 원칙으로
 | 금⁠지⁠는 훅⁠으⁠로⁠, 강⁠제⁠는 권⁠한⁠으⁠로 | 훅은 실제로 겪은 실수만 거르고 차단은 세션 권한과 브랜치 보호로 |
 | 상⁠태⁠와 기⁠억⁠은 파⁠일⁠에 둔⁠다 | 세션이나 모델을 바꿔도 파일을 읽고 이어서 진행 |
 
-zeek_AD 대시보드에서는 검토 세션의 지적으로 감사 로그의 접속 IP를 위조할 수 있던 문제를 고쳤습니다. 독립 검토 구조는 Google이 공개한 EGM을 참고했습니다.
+대표 프로젝트의 관제 대시보드(nbad-dashboard)에서는 검토 세션의 지적으로 감사 로그의 접속 IP를 위조할 수 있던 문제를 고쳤습니다. 독립 검토 구조는 Google이 공개한 EGM을 참고했습니다.
 
 ---
 
