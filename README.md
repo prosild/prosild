@@ -202,9 +202,9 @@ AI에 구현을 맡길 때 사람이 정할 것과 확인할 것을 원칙으로
 | 영⁠역 | 기술 |
 | --- | --- |
 | ML / Data | Python, PyTorch, PyTorch Geometric, scikit-learn, PySpark, pandas, NumPy |
-| Network | Zeek, Scapy, tcpdump |
+| Network | Zeek, Scapy |
 | MLOps / Serving | MLflow, FastAPI, Docker, Docker Compose |
 | LLM | LangGraph, pgvector |
 | Database | PostgreSQL |
 | Backend | Java, Spring Boot, MyBatis, SQL |
-| Infra | Linux, Git, VMware, Synology NAS |
+| Infra | Linux, Git, VMware |
